@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BroadLinkSDKDemo</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="btn_init_network_lib">库初始化</string>
+    <string name="btn_probe_list">查找新设备列表</string>
+    <string name="btn_sp2_switch_on">选中的sp2开</string>
+    <string name="btn_sp2_switch_off">选中的sp2关</string>
+    <string name="tv_warn">必须先初始化</string>
+    <string name="tv_warn_wifi_ssid_password">输入Wi-Fi密码后EasyConfig</string>
+    <string name="btn_EasyConfig_v2">V2 EasyConfig</string>
+    <string name="btn_EasyConfig_v1">V1 EasyConfig</string>
+    <string name="toast_probe_to_show_new_device">成功，重新Probe查看新设备!</string>
+    <string name="toast_probe_no_device">局域网内没有设备</string>
+    <string name="tv_warn_probe_to_find_device">查找设备列表并选择某一设备</string>
+    <string name="toast_lib_init_success">库初始化成功</string>
+    <string name="toast_lib_init_fail">库初始化失败</string>
+    <string name="alert_button_confirm">确定</string>
+
+    <!-- RM2 Control -->
+    <string name="title_rm2_control">----控制RM2----</string>
+    <string name="rm2_study">点击进入学习状态</string>
+    <string name="rm2_code">获取控制码</string>
+    <string name="rm2_send">发送控制码</string>
+    <string name="toast_rm2_study_success">RM2 Study Success!</string>
+    <string name="toast_rm2_study_fail">RM2 Study Fail!</string>
+    <string name="toast_rm2_code_success">RM2 Code Success!</string>
+    <string name="toast_rm2_code_fail">RM2 Code Fail!</string>
+
+    <!-- RM1 Control -->
+    <string name="title_rm1_control">----控制RM1----</string>
+    <string name="rm1_auth">RM1 Auth</string>
+    <string name="rm1_study">点击进入学习状态</string>
+    <string name="rm1_code">获取控制码</string>
+    <string name="rm1_send">发送控制码</string>
+    <string name="toast_rm1_auth_success">RM1 Auth Success!</string>
+    <string name="toast_rm1_auth_fail">RM1 Auth Fail!</string>
+    <string name="toast_rm1_study_success">RM1 Study Success!</string>
+    <string name="toast_rm1_study_fail">RM1 Study Fail!</string>
+    <string name="toast_rm1_code_success">RM1 Code Success!</string>
+    <string name="toast_rm1_code_fail">RM1 Code Fail!</string>
+    <!-- A1 Control -->
+    <string name="a1_control">A1 Control</string>
+    <string name="btn_probe">probe until A1 show</string>
+    <string name="toast_demo_is_under_vevision">Demo正在改版中，请只点击A1设备</string>
+    <string name="a1_temperature">temperature</string>
+    <string name="a1_humidity">humidity</string>
+    <string name="a1_light">light</string>
+    <string name="toast_a1_refresh_success">A1 Refresh Success</string>
+    <string name="toast_a1_refresh_fail">A1 Refresh Fail</string>
+    <string name="toast_a1_task_list_success">A1 Task List Success</string>
+    <string name="toast_a1_task_list_fail">A1 Task List Fail</string>
+    <string name="toast_a1_task_add_success">A1 Task Add Success</string>
+    <string name="toast_a1_task_add_fail">A1 Task Add Fail</string>
+    <string name="toast_a1_task_del_success">A1 Task Delete Success</string>
+    <string name="toast_a1_task_del_fail">A1 Task Delete Fail</string>
+    <string name="btn_add_task">Add Task</string>
+    <string name="btn_delete_task">Delete Task</string>
+    <string name="btn_show_task">Show Task</string>
+
+</resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BroadLinkSDKDemo</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="btn_init_network_lib">Init Lib</string>
+    <string name="btn_probe_list">Probe Device List</string>
+    <string name="btn_sp2_switch_on">Selected SP2 On</string>
+    <string name="btn_sp2_switch_off">Selected SP2 Off</string>
+    <string name="tv_warn">Must init the Lib first!!!</string>
+    <string name="tv_warn_wifi_ssid_password">After inputing the WiFi password,EasyConfig</string>
+    <string name="btn_EasyConfig_v2">EasyConfig</string>
+    <string name="toast_probe_to_show_new_device">EasyConfig Success,probe device again to find the new added device!</string>
+    <string name="toast_probe_no_device">No device in the Local Area Network</string>
+    <string name="tv_warn_probe_to_find_device">Porbe device list and choose a device to control</string>
+    <string name="toast_lib_init_success">Lib init success</string>
+    <string name="toast_lib_init_fail">Lib init fail</string>
+    <string name="alert_button_confirm">Confirm</string>
+
+    <!-- RM2 Control -->
+    <string name="title_rm2_control">----Control RM2----</string>
+    <string name="rm2_study">Click to go into study state</string>
+    <string name="rm2_code">Get Control Code</string>
+    <string name="rm2_send">Send Control Code</string>
+    <string name="toast_rm2_study_success">RM2 Study Success!</string>
+    <string name="toast_rm2_study_fail">RM2 Study Fail!</string>
+    <string name="toast_rm2_code_success">RM2 Code Success!</string>
+    <string name="toast_rm2_code_fail">RM2 Code Fail!</string>
+    <!-- RM1 Control -->
+    <string name="title_rm1_control">----Control RM1----</string>
+    <string name="rm1_study">Click to go into study state</string>
+    <string name="rm1_code">Get Control Code</string>
+    <string name="rm1_send">Send Control Code</string>
+    <string name="toast_rm1_study_success">RM1 Study Success!</string>
+    <string name="toast_rm1_study_fail">RM1 Study Fail!</string>
+    <string name="toast_rm1_code_success">RM1 Code Success!</string>
+    <string name="toast_rm1_code_fail">RM1 Code Fail!</string>
+     <!-- A1 Control -->
+    <string name="a1_control">A1 Control</string>
+    <string name="btn_probe">probe until A1 show</string>
+    <string name="toast_demo_is_under_vevision">Demo is under vevision，please click on A1 only</string>
+    <string name="a1_temperature">temperature</string>
+    <string name="a1_humidity">humidity</string>
+    <string name="a1_light">light</string>
+    <string name="toast_a1_refresh_success">A1 Refresh Success</string>
+    <string name="toast_a1_refresh_fail">A1 Refresh Fail</string>
+    <string name="toast_a1_task_list_success">A1 Task List Success</string>
+    <string name="toast_a1_task_list_fail">A1 Task List Fail</string>
+    <string name="toast_a1_task_add_success">A1 Task Add Success</string>
+    <string name="toast_a1_task_add_fail">A1 Task Add Fail</string>
+    <string name="toast_a1_task_del_success">A1 Task Delete Success</string>
+    <string name="toast_a1_task_del_fail">A1 Task Delete Fail</string>
+    <string name="btn_add_task">Add Task</string>
+    <string name="btn_delete_task">Delete Task</string>
+    <string name="btn_show_task">Show Task</string>
+
+</resources>
