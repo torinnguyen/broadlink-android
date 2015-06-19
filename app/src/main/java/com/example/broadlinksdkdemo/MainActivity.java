@@ -1,8 +1,5 @@
 package com.example.broadlinksdkdemo;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,13 +12,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.com.broadlink.blnetwork.BLNetwork;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
+import cn.com.broadlink.blnetwork.BLNetwork;
 
 public class MainActivity extends Activity {
 
@@ -55,10 +56,9 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		mBlNetwork = BLNetwork.getInstanceBLNetwork(MainActivity.this);
-		findView();
+		initUI();
 
 		setListener();
-
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
 		initView();
 	}
 
-	public void findView() {
+	public void initUI() {
 
 		mBtnProbeListButton = (Button) findViewById(R.id.btn_probe_list);
 		mBtnSwitchOn = (Button) findViewById(R.id.btn_switch_on);
@@ -89,7 +89,13 @@ public class MainActivity extends Activity {
 		mTvRM1CodeResult = (TextView) findViewById(R.id.tv_rm1_code_result);
 
 		mBtnA1Control = (Button) findViewById(R.id.btn_a1_control);
+	}
 
+	public void initView() {
+		NetworkUtil networkUtil = new NetworkUtil(MainActivity.this);
+		networkUtil.startScan();
+		String ssid = networkUtil.getWiFiSSID();
+		mEtWifiSSIDEditText.setText(ssid);
 	}
 
 	// Probe List
@@ -353,14 +359,6 @@ public class MainActivity extends Activity {
 			});
 
 		}
-
-	}
-
-	public void initView() {
-		NetworkUtil networkUtil = new NetworkUtil(MainActivity.this);
-		networkUtil.startScan();
-		String ssid = networkUtil.getWiFiSSID();
-		mEtWifiSSIDEditText.setText(ssid);
 
 	}
 

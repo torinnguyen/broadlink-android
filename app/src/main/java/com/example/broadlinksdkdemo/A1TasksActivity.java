@@ -79,8 +79,8 @@ public class A1TasksActivity extends Activity {
 		JsonObject in = new JsonObject();
 		JsonObject out = new JsonObject();
 		String outString;
-		in.addProperty(MyApplication.api_id, 162);
-		in.addProperty(MyApplication.command, "a1_task_list");
+		in.addProperty(MyApplication.API_ID, 162);
+		in.addProperty(MyApplication.COMMAND, "a1_task_list");
 		in.addProperty("mac", mMac);
 		Log.e("mac", mMac);
 		String inString = in.toString();
@@ -111,8 +111,8 @@ public class A1TasksActivity extends Activity {
 		JsonObject in = new JsonObject();
 		JsonObject out = new JsonObject();
 		String outString;
-		in.addProperty(MyApplication.api_id, 163);
-		in.addProperty(MyApplication.command, "a1_add_task");
+		in.addProperty(MyApplication.API_ID, 163);
+		in.addProperty(MyApplication.COMMAND, "a1_add_task");
 		in.addProperty("mac", mMac);
 		in.addProperty("task_name", "关闭空调");
 		in.addProperty("time_enable", 1);
@@ -163,8 +163,8 @@ public class A1TasksActivity extends Activity {
 		JsonObject in = new JsonObject();
 		JsonObject out = new JsonObject();
 		String outString;
-		in.addProperty(MyApplication.api_id, 164);
-		in.addProperty(MyApplication.command, "a1_del_task");
+		in.addProperty(MyApplication.API_ID, 164);
+		in.addProperty(MyApplication.COMMAND, "a1_del_task");
 		in.addProperty("mac", mMac);
 		in.addProperty("index", mDeleteTaskID);
 

@@ -26,7 +26,6 @@ public class A1InfoActivity extends Activity {
 		findView();
 		setListener();
 		mMac = getIntent().getStringExtra("A1_Mac");
-
 	}
 
 	@Override
@@ -39,7 +38,6 @@ public class A1InfoActivity extends Activity {
 		mTvTemperature = (TextView) findViewById(R.id.tv_a1_temperature_value);
 		mTvHumidity = (TextView) findViewById(R.id.tv_a1_humidity_value);
 		mBtnShowTask = (Button) findViewById(R.id.btn_show_task);
-
 	}
 
 	private void initView() {
@@ -62,8 +60,8 @@ public class A1InfoActivity extends Activity {
 		JsonObject initJsonObjectIn = new JsonObject();
 		JsonObject initJsonObjectOut = new JsonObject();
 		String initOut;
-		initJsonObjectIn.addProperty(MyApplication.api_id, 161);
-		initJsonObjectIn.addProperty(MyApplication.command, "a1_refresh");
+		initJsonObjectIn.addProperty(MyApplication.API_ID, 161);
+		initJsonObjectIn.addProperty(MyApplication.COMMAND, "a1_refresh");
 		initJsonObjectIn.addProperty("mac", mMac);
 
 		String string = initJsonObjectIn.toString();

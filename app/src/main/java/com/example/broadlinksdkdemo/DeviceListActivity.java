@@ -91,8 +91,8 @@ public class DeviceListActivity extends Activity {
 		JsonObject out = new JsonObject();
 		JsonArray listJsonArray = new JsonArray();
 		String probeOut;
-		in.addProperty(MyApplication.api_id, 11);
-		in.addProperty(MyApplication.command, "probe_list");
+		in.addProperty(MyApplication.API_ID, 11);
+		in.addProperty(MyApplication.COMMAND, "probe_list");
 		String string = in.toString();
 		probeOut = MyApplication.mBlNetwork.requestDispatch(string);
 
@@ -122,8 +122,8 @@ public class DeviceListActivity extends Activity {
 	public void addDevice(int position) {
 		JsonObject in = new JsonObject();
 		JsonObject out = new JsonObject();
-		in.addProperty(MyApplication.api_id, 12);
-		in.addProperty(MyApplication.command, "device_add");
+		in.addProperty(MyApplication.API_ID, 12);
+		in.addProperty(MyApplication.COMMAND, "device_add");
 		in.addProperty("mac", mDeviceList.get(position).getMac());
 		in.addProperty("type", mDeviceList.get(position).getType());
 		in.addProperty("name", mDeviceList.get(position).getName());
