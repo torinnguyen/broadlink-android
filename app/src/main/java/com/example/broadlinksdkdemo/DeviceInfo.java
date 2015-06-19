@@ -1,9 +1,6 @@
 package com.example.broadlinksdkdemo;
 
 class DeviceInfo {
-	public DeviceInfo() {
-
-	}
 
 	String mac;
 	String type;

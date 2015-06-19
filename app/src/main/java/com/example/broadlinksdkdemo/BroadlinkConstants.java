@@ -1,4 +1,4 @@
-package com.example.broadlinksdkdemo.application;
+package com.example.broadlinksdkdemo;
 
 /**
  * Created by Torin on 19/6/15.

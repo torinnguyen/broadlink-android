@@ -1,4 +1,4 @@
-package com.example.broadlinksdkdemo.application;
+package com.example.broadlinksdkdemo;
 
 import android.app.Application;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import android.util.Log;
 
 import com.broadlink.blcloudac.BLCloudAC;
-import com.example.broadlinksdkdemo.R;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 

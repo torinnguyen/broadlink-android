@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.broadlinksdkdemo.application.BroadlinkConstants;
-import com.example.broadlinksdkdemo.application.MyApplication;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
