@@ -93,7 +93,7 @@ public class DeviceListActivity extends Activity {
 		in.addProperty(BroadlinkConstants.API_ID, 11);
 		in.addProperty(BroadlinkConstants.COMMAND, "probe_list");
 		String string = in.toString();
-		probeOut = MyApplication.mBlNetwork.requestDispatch(string);
+		probeOut = BroadlinkAPI.getInstance().getBlNetwork().requestDispatch(string);
 
 		out = new JsonParser().parse(probeOut).getAsJsonObject();
 		int code = out.get(CODE).getAsInt();
@@ -133,7 +133,7 @@ public class DeviceListActivity extends Activity {
 		in.addProperty("key", mDeviceList.get(position).getKey());
 		String string = in.toString();
 		String outString;
-		outString = MyApplication.mBlNetwork.requestDispatch(string);
+		outString = BroadlinkAPI.getInstance().getBlNetwork().requestDispatch(string);
 		out = new JsonParser().parse(outString).getAsJsonObject();
 
 	}

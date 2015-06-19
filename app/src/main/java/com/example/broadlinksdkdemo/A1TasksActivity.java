@@ -83,7 +83,7 @@ public class A1TasksActivity extends Activity {
 		in.addProperty("mac", mMac);
 		Log.e("mac", mMac);
 		String inString = in.toString();
-		outString = MyApplication.mBlNetwork.requestDispatch(inString);
+		outString = BroadlinkAPI.getInstance().getBlNetwork().requestDispatch(inString);
 		Log.e("A1Tasks", "A1Tasks\n" + outString);
 		out = new JsonParser().parse(outString).getAsJsonObject();
 		int code = out.get(BroadlinkConstants.CODE).getAsInt();
@@ -133,7 +133,7 @@ public class A1TasksActivity extends Activity {
 
 		Log.e("mac", mMac);
 		String inString = in.toString();
-		outString = MyApplication.mBlNetwork.requestDispatch(inString);
+		outString = BroadlinkAPI.getInstance().getBlNetwork().requestDispatch(inString);
 		Log.e("A1Tasks", "A1Tasks\n" + outString);
 		out = new JsonParser().parse(outString).getAsJsonObject();
 		int code = out.get(BroadlinkConstants.CODE).getAsInt();
@@ -168,7 +168,7 @@ public class A1TasksActivity extends Activity {
 		in.addProperty("index", mDeleteTaskID);
 
 		String inString = in.toString();
-		outString = MyApplication.mBlNetwork.requestDispatch(inString);
+		outString = BroadlinkAPI.getInstance().getBlNetwork().requestDispatch(inString);
 
 		out = new JsonParser().parse(outString).getAsJsonObject();
 		int code = out.get(BroadlinkConstants.CODE).getAsInt();

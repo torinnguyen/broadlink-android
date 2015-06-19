@@ -64,7 +64,7 @@ public class A1InfoActivity extends Activity {
 		initJsonObjectIn.addProperty("mac", mMac);
 
 		String string = initJsonObjectIn.toString();
-		initOut = MyApplication.mBlNetwork.requestDispatch(string);
+		initOut = BroadlinkAPI.getInstance().getBlNetwork().requestDispatch(string);
 
 		initJsonObjectOut = new JsonParser().parse(initOut).getAsJsonObject();
 

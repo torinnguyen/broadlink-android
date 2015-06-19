@@ -5,38 +5,31 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.util.Log;
 
-import com.broadlink.blcloudac.BLCloudAC;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import java.util.Locale;
 
-import cn.com.broadlink.blnetwork.BLNetwork;
-
 public class MyApplication extends Application {
 
-    public static BLNetwork mBlNetwork;
-    public static BLCloudAC blCloudAC;
+    private static Context mAppContext;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        try {
-            mBlNetwork = BLNetwork.getInstanceBLNetwork(this);
-            blCloudAC = BLCloudAC.getInstance();
-        } catch (Exception e) {
-            Log.e(this.getClass().getSimpleName(), "" + e);
-        }
+        mAppContext = getApplicationContext();
+
         setLocaleEn(this);
+
+        //Init Broadlink API
         initBroadlink();
     }
 
     // Init Network Lib
     public void initBroadlink() {
         //Initialize Broadlink SDK
-        JsonObject initJson = broadlinkInitNetwork();
+        JsonObject initJson = BroadlinkAPI.getInstance().broadlinkInitNetwork();
 
-        JsonObject versionJson = broadlinkVersion();
+        JsonObject versionJson = BroadlinkAPI.getInstance().broadlinkVersion();
         if (versionJson.has("version") && versionJson.get("version") != null)
             Log.e(this.getClass().getSimpleName(), "BROADLINK VERSION: " + versionJson.get("version"));
         if (versionJson.has("update") && versionJson.get("update") != null)
@@ -45,47 +38,12 @@ public class MyApplication extends Application {
 
 
     //------------------------------------------------------------------------------------------------
-    // Broadlink lowest level functions
-    //------------------------------------------------------------------------------------------------
-
-    private String broadlinkLicense() {
-        return getString(R.string.broadlink_key);
-    }
-
-    private JsonObject broadlinkStandardParams(int api_id, String command){
-        JsonObject initJsonObjectParams = new JsonObject();
-        initJsonObjectParams.addProperty(BroadlinkConstants.API_ID, api_id);
-        initJsonObjectParams.addProperty(BroadlinkConstants.COMMAND, command);
-        initJsonObjectParams.addProperty(BroadlinkConstants.LICENSE, broadlinkLicense());
-        return initJsonObjectParams;
-    }
-
-    private JsonObject broadlinkExecuteCommand(int api_id, String command) {
-        JsonObject initJsonObjectParams = broadlinkStandardParams(api_id, command);
-        String responseString = mBlNetwork.requestDispatch(initJsonObjectParams.toString());
-        JsonObject responseJsonObject = new JsonParser().parse(responseString).getAsJsonObject();
-        Log.d(this.getClass().getSimpleName(), responseString);
-        return responseJsonObject;
-    }
-
-    //------------------------------------------------------------------------------------------------
-    // Broadlink highest level functions
-    //------------------------------------------------------------------------------------------------
-
-    //Initialize Broadlink SDK
-    private JsonObject broadlinkInitNetwork() {
-        return broadlinkExecuteCommand(BroadlinkConstants.CMD_NETWORK_INIT_ID, BroadlinkConstants.CMD_NETWORK_INIT);
-    }
-
-    //Show SDK version
-    private JsonObject broadlinkVersion() {
-        return broadlinkExecuteCommand(BroadlinkConstants.CMD_SDK_VERSION_ID, BroadlinkConstants.CMD_SDK_VERSION);
-    }
-
-
-    //------------------------------------------------------------------------------------------------
     // Helpers
     //------------------------------------------------------------------------------------------------
+
+    public static Context getAppContext() {
+        return mAppContext;
+    }
 
     //Force using English language
     private void setLocaleEn(Context context) {
