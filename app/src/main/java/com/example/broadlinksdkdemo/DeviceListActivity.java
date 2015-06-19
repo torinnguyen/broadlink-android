@@ -1,9 +1,5 @@
 package com.example.broadlinksdkdemo;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,12 +13,17 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.broadlinksdkdemo.application.BroadlinkConstants;
 import com.example.broadlinksdkdemo.application.MyApplication;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DeviceListActivity extends Activity {
 	private ListView mLvDeviceList;
@@ -91,8 +92,8 @@ public class DeviceListActivity extends Activity {
 		JsonObject out = new JsonObject();
 		JsonArray listJsonArray = new JsonArray();
 		String probeOut;
-		in.addProperty(MyApplication.API_ID, 11);
-		in.addProperty(MyApplication.COMMAND, "probe_list");
+		in.addProperty(BroadlinkConstants.API_ID, 11);
+		in.addProperty(BroadlinkConstants.COMMAND, "probe_list");
 		String string = in.toString();
 		probeOut = MyApplication.mBlNetwork.requestDispatch(string);
 
@@ -122,8 +123,8 @@ public class DeviceListActivity extends Activity {
 	public void addDevice(int position) {
 		JsonObject in = new JsonObject();
 		JsonObject out = new JsonObject();
-		in.addProperty(MyApplication.API_ID, 12);
-		in.addProperty(MyApplication.COMMAND, "device_add");
+		in.addProperty(BroadlinkConstants.API_ID, 12);
+		in.addProperty(BroadlinkConstants.COMMAND, "device_add");
 		in.addProperty("mac", mDeviceList.get(position).getMac());
 		in.addProperty("type", mDeviceList.get(position).getType());
 		in.addProperty("name", mDeviceList.get(position).getName());

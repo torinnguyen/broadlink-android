@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.broadlinksdkdemo.application.BroadlinkConstants;
 import com.example.broadlinksdkdemo.application.MyApplication;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -60,8 +61,8 @@ public class A1InfoActivity extends Activity {
 		JsonObject initJsonObjectIn = new JsonObject();
 		JsonObject initJsonObjectOut = new JsonObject();
 		String initOut;
-		initJsonObjectIn.addProperty(MyApplication.API_ID, 161);
-		initJsonObjectIn.addProperty(MyApplication.COMMAND, "a1_refresh");
+		initJsonObjectIn.addProperty(BroadlinkConstants.API_ID, 161);
+		initJsonObjectIn.addProperty(BroadlinkConstants.COMMAND, "a1_refresh");
 		initJsonObjectIn.addProperty("mac", mMac);
 
 		String string = initJsonObjectIn.toString();
@@ -69,7 +70,7 @@ public class A1InfoActivity extends Activity {
 
 		initJsonObjectOut = new JsonParser().parse(initOut).getAsJsonObject();
 
-		int code = initJsonObjectOut.get(MyApplication.CODE).getAsInt();
+		int code = initJsonObjectOut.get(BroadlinkConstants.CODE).getAsInt();
 		if (0 == code) {
 			Toast.makeText(this, getString(R.string.toast_a1_refresh_success), Toast.LENGTH_SHORT).show();
 			mTvTemperature.setText(initJsonObjectOut.get("temperature").getAsFloat() + "");

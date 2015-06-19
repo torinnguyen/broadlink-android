@@ -1,9 +1,5 @@
 package com.example.broadlinksdkdemo;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,12 +9,17 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.broadlinksdkdemo.application.BroadlinkConstants;
 import com.example.broadlinksdkdemo.application.MyApplication;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class A1TasksActivity extends Activity {
 
@@ -79,15 +80,15 @@ public class A1TasksActivity extends Activity {
 		JsonObject in = new JsonObject();
 		JsonObject out = new JsonObject();
 		String outString;
-		in.addProperty(MyApplication.API_ID, 162);
-		in.addProperty(MyApplication.COMMAND, "a1_task_list");
+		in.addProperty(BroadlinkConstants.API_ID, 162);
+		in.addProperty(BroadlinkConstants.COMMAND, "a1_task_list");
 		in.addProperty("mac", mMac);
 		Log.e("mac", mMac);
 		String inString = in.toString();
 		outString = MyApplication.mBlNetwork.requestDispatch(inString);
 		Log.e("A1Tasks", "A1Tasks\n" + outString);
 		out = new JsonParser().parse(outString).getAsJsonObject();
-		int code = out.get(MyApplication.CODE).getAsInt();
+		int code = out.get(BroadlinkConstants.CODE).getAsInt();
 
 		if (0 == code) {
 			Toast.makeText(A1TasksActivity.this, R.string.toast_a1_task_list_success, Toast.LENGTH_SHORT).show();
@@ -111,8 +112,8 @@ public class A1TasksActivity extends Activity {
 		JsonObject in = new JsonObject();
 		JsonObject out = new JsonObject();
 		String outString;
-		in.addProperty(MyApplication.API_ID, 163);
-		in.addProperty(MyApplication.COMMAND, "a1_add_task");
+		in.addProperty(BroadlinkConstants.API_ID, 163);
+		in.addProperty(BroadlinkConstants.COMMAND, "a1_add_task");
 		in.addProperty("mac", mMac);
 		in.addProperty("task_name", "关闭空调");
 		in.addProperty("time_enable", 1);
@@ -137,7 +138,7 @@ public class A1TasksActivity extends Activity {
 		outString = MyApplication.mBlNetwork.requestDispatch(inString);
 		Log.e("A1Tasks", "A1Tasks\n" + outString);
 		out = new JsonParser().parse(outString).getAsJsonObject();
-		int code = out.get(MyApplication.CODE).getAsInt();
+		int code = out.get(BroadlinkConstants.CODE).getAsInt();
 
 		if (0 == code) {
 			Toast.makeText(A1TasksActivity.this, R.string.toast_a1_task_add_success, Toast.LENGTH_SHORT).show();
@@ -163,8 +164,8 @@ public class A1TasksActivity extends Activity {
 		JsonObject in = new JsonObject();
 		JsonObject out = new JsonObject();
 		String outString;
-		in.addProperty(MyApplication.API_ID, 164);
-		in.addProperty(MyApplication.COMMAND, "a1_del_task");
+		in.addProperty(BroadlinkConstants.API_ID, 164);
+		in.addProperty(BroadlinkConstants.COMMAND, "a1_del_task");
 		in.addProperty("mac", mMac);
 		in.addProperty("index", mDeleteTaskID);
 
@@ -172,7 +173,7 @@ public class A1TasksActivity extends Activity {
 		outString = MyApplication.mBlNetwork.requestDispatch(inString);
 
 		out = new JsonParser().parse(outString).getAsJsonObject();
-		int code = out.get(MyApplication.CODE).getAsInt();
+		int code = out.get(BroadlinkConstants.CODE).getAsInt();
 
 		if (0 == code) {
 			Toast.makeText(A1TasksActivity.this, R.string.toast_a1_task_del_success, Toast.LENGTH_SHORT).show();

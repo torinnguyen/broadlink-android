@@ -16,16 +16,6 @@ import cn.com.broadlink.blnetwork.BLNetwork;
 
 public class MyApplication extends Application {
 
-    //Broadlink standard parameters
-    public static final String API_ID = "api_id";
-    public static final String CODE = "code";
-    public static final String COMMAND = "command";
-    public static final String LICENSE = "license";
-
-    //Broadlink commands
-    public static final String CMD_NETWORK_INIT = "network_init";
-    public static final String CMD_SDK_VERSION = "SDK_version";
-
     public static BLNetwork mBlNetwork;
     public static BLCloudAC blCloudAC;
 
@@ -65,9 +55,9 @@ public class MyApplication extends Application {
 
     private JsonObject broadlinkStandardParams(int api_id, String command){
         JsonObject initJsonObjectParams = new JsonObject();
-        initJsonObjectParams.addProperty(API_ID, api_id);
-        initJsonObjectParams.addProperty(COMMAND, command);
-        initJsonObjectParams.addProperty(LICENSE, broadlinkLicense());
+        initJsonObjectParams.addProperty(BroadlinkConstants.API_ID, api_id);
+        initJsonObjectParams.addProperty(BroadlinkConstants.COMMAND, command);
+        initJsonObjectParams.addProperty(BroadlinkConstants.LICENSE, broadlinkLicense());
         return initJsonObjectParams;
     }
 
@@ -85,12 +75,12 @@ public class MyApplication extends Application {
 
     //Initialize Broadlink SDK
     private JsonObject broadlinkInitNetwork() {
-        return broadlinkExecuteCommand(1, CMD_NETWORK_INIT);
+        return broadlinkExecuteCommand(BroadlinkConstants.CMD_NETWORK_INIT_ID, BroadlinkConstants.CMD_NETWORK_INIT);
     }
 
     //Show SDK version
     private JsonObject broadlinkVersion() {
-        return broadlinkExecuteCommand(2, CMD_SDK_VERSION);
+        return broadlinkExecuteCommand(BroadlinkConstants.CMD_SDK_VERSION_ID, BroadlinkConstants.CMD_SDK_VERSION);
     }
 
 
