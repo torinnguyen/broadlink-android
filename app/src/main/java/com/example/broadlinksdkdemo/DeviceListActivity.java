@@ -28,8 +28,6 @@ public class DeviceListActivity extends Activity {
 
 	private Button mBtnInitButton, mBtnProbeListButton, mBtnSwitchOn, mBtnSwitchOff, mBtnEasyConfigV2, mBtnEasyConfigV1;
 	private EditText mEtWifiSSIDEditText, mEtWifiPasswordEditText;
-	private String CODE = "code";
-	private String MSG = "msg";
 
 	private List<DeviceInfo> mDeviceList;
 	private DeviceListAdapter mDeviceListAdapter;
@@ -57,7 +55,7 @@ public class DeviceListActivity extends Activity {
 		mLvDeviceList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if (mDeviceList.get(position).type.equals(DeviceType.A1)) {
+				if (mDeviceList.get(position).type.equalsIgnoreCase(BroadlinkConstants.A1)) {
 					Intent intent = new Intent(DeviceListActivity.this, A1InfoActivity.class);
 					intent.putExtra("A1_Mac", mDeviceList.get(position).mac);
 					addDevice(position);
@@ -96,8 +94,8 @@ public class DeviceListActivity extends Activity {
 		probeOut = BroadlinkAPI.getInstance().getBlNetwork().requestDispatch(string);
 
 		out = new JsonParser().parse(probeOut).getAsJsonObject();
-		int code = out.get(CODE).getAsInt();
-		String msg = out.get(MSG).getAsString();
+		int code = out.get(BroadlinkConstants.CODE).getAsInt();
+		String msg = out.get(BroadlinkConstants.MSG).getAsString();
 		Log.e("result", "probeOut " + probeOut + "code  " + code + "msg  " + msg);
 		listJsonArray = out.get("list").getAsJsonArray();
 

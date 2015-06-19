@@ -5,11 +5,19 @@ package com.example.broadlinksdkdemo;
  */
 public class BroadlinkConstants {
 
-    //Broadlink standard parameters
+    //Broadlink standard input parameters
     public static final String API_ID = "api_id";
-    public static final String CODE = "code";
     public static final String COMMAND = "command";
     public static final String LICENSE = "license";
+
+    //Broadlink standard output parameters
+    public static final String CODE = "code";
+    public static final String MSG = "msg";
+
+    //Broadlink devices
+    public static final String A1 = "A1";
+    public static final String RM1 = "RM1";
+    public static final String RM2 = "RM1";
 
     //Broadlink command strings
     public static final String CMD_NETWORK_INIT = "network_init";

@@ -2,14 +2,33 @@ package com.example.broadlinksdkdemo;
 
 class DeviceInfo {
 
-	String mac;
-	String type;
-	String name;
-	int lock;
-	int password;
-	int id;
-	int subdevice;
-	String key;
+	/*
+	{
+		code = 0;
+		list =     (
+					{
+				id = 1;
+				key = d6ccb6520d402d4243b3a3317a261a21;
+				lock = 0;
+				mac = "b4:43:0d:10:56:3a";
+				name = "\U667a\U80fd\U9065\U63a7";
+				password = 347606638;
+				subdevice = 0;
+				type = RM2;
+			}
+		);
+		msg = "Execute success";
+	}
+	*/
+
+	public String mac;
+	public String type;
+	public String name;
+	public String key;
+	public int lock;
+	public int password;
+	public int id;
+	public int subdevice;
 
 	public String getMac() {
 		return mac;

@@ -39,10 +39,6 @@ public class A1InfoActivity extends Activity {
 		mBtnShowTask = (Button) findViewById(R.id.btn_show_task);
 	}
 
-	private void initView() {
-
-	}
-
 	private void setListener() {
 		mBtnShowTask.setOnClickListener(new OnClickListener() {
 
