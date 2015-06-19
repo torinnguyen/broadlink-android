@@ -18,6 +18,9 @@ public class BroadlinkConstants {
     public static final String A1 = "A1";
     public static final String RM1 = "RM1";
     public static final String RM2 = "RM1";
+    public static final String SP1 = "SP1";
+    public static final String SP2 = "SP2";
+    public static final String TC1 = "TC1";
 
     //Broadlink command strings
     public static final String CMD_NETWORK_INIT = "network_init";
