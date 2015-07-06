@@ -4,8 +4,14 @@ import android.content.Context;
 import android.util.Log;
 
 import com.broadlink.blcloudac.BLCloudAC;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import cn.com.broadlink.blnetwork.BLNetwork;
 
@@ -62,7 +68,7 @@ public class BroadlinkAPI {
         return mLicenseString;
     }
 
-    public JsonObject broadlinkStandardParams(int api_id, String command){
+    public JsonObject broadlinkStandardParams(int api_id, String command) {
         JsonObject initJsonObjectParams = new JsonObject();
         initJsonObjectParams.addProperty(BroadlinkConstants.API_ID, api_id);
         initJsonObjectParams.addProperty(BroadlinkConstants.COMMAND, command);
@@ -95,6 +101,151 @@ public class BroadlinkAPI {
     //Show SDK version
     public JsonObject broadlinkVersion() {
         return broadlinkExecuteCommand(BroadlinkConstants.CMD_SDK_VERSION_ID, BroadlinkConstants.CMD_SDK_VERSION);
+    }
+
+    //Magic config
+    public JsonObject easyConfig(String ssid, String password, boolean isVersion2) {
+        JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_EASY_CONFIG_ID, BroadlinkConstants.CMD_EASY_CONFIG);
+        initJsonObjectParams.addProperty("ssid", ssid);
+        initJsonObjectParams.addProperty("password", password);
+        initJsonObjectParams.addProperty("broadlinkv2", isVersion2 ? 1 : 0);
+        return broadlinkExecuteCommand(initJsonObjectParams);
+    }
+
+    //Retrieve a list of devices within same WiFi
+    public ArrayList<DeviceInfo> getProbeList() {
+        JsonObject out = broadlinkExecuteCommand(BroadlinkConstants.CMD_PROBE_LIST_ID, BroadlinkConstants.CMD_PROBE_LIST);
+        JsonArray listJsonArray = out.get("list").getAsJsonArray();
+
+        Gson gson = new Gson();
+        Type listType = new TypeToken<ArrayList<DeviceInfo>>() {
+        }.getType();
+        ArrayList<DeviceInfo> deviceArrayList = (ArrayList<DeviceInfo>) gson.fromJson(listJsonArray, listType);
+        if (deviceArrayList.size() <= 0)
+            return null;
+
+        return deviceArrayList;
+    }
+
+    //Add a device to Broadlink SDK before it can be controlled
+    public JsonObject addDevice(DeviceInfo selectedDevice) {
+        JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_DEVICE_ADD_ID, BroadlinkConstants.CMD_DEVICE_ADD);
+        initJsonObjectParams.addProperty("mac", selectedDevice.getMac());
+        initJsonObjectParams.addProperty("type", selectedDevice.getType());
+        initJsonObjectParams.addProperty("name", selectedDevice.getName());
+        initJsonObjectParams.addProperty("lock", selectedDevice.getLock());
+        initJsonObjectParams.addProperty("password", selectedDevice.getPassword());
+        initJsonObjectParams.addProperty("id", selectedDevice.getId());
+        initJsonObjectParams.addProperty("subdevice", selectedDevice.getSubdevice());
+        initJsonObjectParams.addProperty("key", selectedDevice.getKey());
+        return broadlinkExecuteCommand(initJsonObjectParams);
+    }
+
+    //Turn on SP2 device
+    //Note: device must be added to SDK first
+    public boolean SP2On(String mac) {
+        JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_SP2_CONTROL_ID, BroadlinkConstants.CMD_SP2_CONTROL);
+        initJsonObjectParams.addProperty("status", 1);
+        initJsonObjectParams.addProperty("mac", mac);
+
+        JsonObject out = broadlinkExecuteCommand(initJsonObjectParams);
+        int code = out.get(BroadlinkConstants.CODE).getAsInt();
+        return code == 0;
+    }
+
+    //Turn on SP2 device
+    //Note: device must be added to SDK first
+    public boolean SP2Off(String mac) {
+        JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_SP2_CONTROL_ID, BroadlinkConstants.CMD_SP2_CONTROL);
+        initJsonObjectParams.addProperty("status", 0);
+        initJsonObjectParams.addProperty("mac", mac);
+
+        JsonObject out = broadlinkExecuteCommand(initJsonObjectParams);
+        int code = out.get(BroadlinkConstants.CODE).getAsInt();
+        return code == 0;
+    }
+
+    //????
+    public boolean RM1Study(String mac) {
+        JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_RM1_STUDY_ID, BroadlinkConstants.CMD_RM1_STUDY);
+        initJsonObjectParams.addProperty("mac", mac);
+
+        JsonObject out = broadlinkExecuteCommand(initJsonObjectParams);
+        int code = out.get(BroadlinkConstants.CODE).getAsInt();
+        return code == 0;
+    }
+
+    //Authenticate a RM1 device?
+    public boolean RM1Auth(String mac, int password) {
+        JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_RM1_AUTH_ID, BroadlinkConstants.CMD_RM1_AUTH);
+        initJsonObjectParams.addProperty("mac", mac);
+        initJsonObjectParams.addProperty("password", password);
+
+        JsonObject out = broadlinkExecuteCommand(initJsonObjectParams);
+        int code = out.get(BroadlinkConstants.CODE).getAsInt();
+        return code == 0;
+    }
+
+    //Study a code from RM1
+    public String RM1Code(String mac) {
+        JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_RM1_CODE_ID, BroadlinkConstants.CMD_RM1_CODE);
+        initJsonObjectParams.addProperty("mac", mac);
+
+        JsonObject out = broadlinkExecuteCommand(initJsonObjectParams);
+        int code = out.get(BroadlinkConstants.CODE).getAsInt();
+        if (0 != code)
+            return null;
+
+        String data = out.get("data").getAsString();
+        Log.e("RM1StudyCode", data );
+        return data;
+    }
+
+    //Send a code string from RM1
+    public boolean RM1Send(String mac, String sendData) {
+        JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_RM1_SEND_ID, BroadlinkConstants.CMD_RM1_SEND);
+        initJsonObjectParams.addProperty("mac", mac);
+        initJsonObjectParams.addProperty("data", sendData);
+
+        JsonObject out = broadlinkExecuteCommand(initJsonObjectParams);
+        int code = out.get(BroadlinkConstants.CODE).getAsInt();
+        return code == 0;
+    }
+
+    //????
+    public boolean RM2Study(String mac) {
+        JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_RM2_STUDY_ID, BroadlinkConstants.CMD_RM2_STUDY);
+        initJsonObjectParams.addProperty("mac", mac);
+
+        JsonObject out = broadlinkExecuteCommand(initJsonObjectParams);
+        int code = out.get(BroadlinkConstants.CODE).getAsInt();
+        return code == 0;
+    }
+
+    //Study a code from RM2
+    public String RM2Code(String mac) {
+        JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_RM2_CODE_ID, BroadlinkConstants.CMD_RM2_CODE);
+        initJsonObjectParams.addProperty("mac", mac);
+
+        JsonObject out = broadlinkExecuteCommand(initJsonObjectParams);
+        int code = out.get(BroadlinkConstants.CODE).getAsInt();
+        if (0 != code)
+            return null;
+
+        String data = out.get("data").getAsString();
+        Log.e("RM2StudyCode", data );
+        return data;
+    }
+
+    //Send a code string from RM2
+    public boolean RM2Send(String mac, String sendData) {
+        JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_RM2_SEND_ID, BroadlinkConstants.CMD_RM2_SEND);
+        initJsonObjectParams.addProperty("mac", mac);
+        initJsonObjectParams.addProperty("data", sendData);
+
+        JsonObject out = broadlinkExecuteCommand(initJsonObjectParams);
+        int code = out.get(BroadlinkConstants.CODE).getAsInt();
+        return code == 0;
     }
 
 }
