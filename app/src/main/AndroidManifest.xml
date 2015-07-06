@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.broadlinksdkdemo"
-    android:versionCode="1" >
+    package="com.example.broadlinksdkdemo">
 
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -22,10 +21,10 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name="com.example.broadlinksdkdemo.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,16 +33,13 @@
         </activity>
         <activity
             android:name="com.example.broadlinksdkdemo.DeviceListActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name="com.example.broadlinksdkdemo.A1InfoActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name="com.example.broadlinksdkdemo.A1TasksActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

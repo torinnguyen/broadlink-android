@@ -30,7 +30,6 @@ public class MainActivity extends Activity {
 
 	private String api_id = "api_id";
 	private String command = "command";
-	private String licenseValue = "IDqOTOuVhMNQz8XWEc2wqmrjuYeTDGtBlMkm6AT1mmKKNLTrl45x4KzHGywehG/TzmSMIDnemvSlaNMSyYceBTJnNVQ10LKQ9sNzVIBX21r87yx+quE=";
 	private Button mBtnProbeListButton, mBtnSwitchOn, mBtnSwitchOff, mBtnEasyConfigV2, mBtnEasyConfigV1;
 	private EditText mEtWifiSSIDEditText, mEtWifiPasswordEditText;
 	private String CODE = "code";
