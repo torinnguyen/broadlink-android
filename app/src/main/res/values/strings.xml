@@ -49,6 +49,7 @@
     <string name="toast_rm1_study_fail">RM1 Study Fail!</string>
     <string name="toast_rm1_code_success">RM1 Code Success!</string>
     <string name="toast_rm1_code_fail">RM1 Code Fail!</string>
+
     <!-- A1 Control -->
     <string name="a1_control">A1 Control</string>
     <string name="btn_probe">probe until A1 show</string>
