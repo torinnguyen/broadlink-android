@@ -17,22 +17,23 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
-import cn.com.broadlink.blnetwork.BLNetwork;
-
 public class MainActivity extends Activity {
 
-    private BLNetwork mBlNetwork;
-
-    private String api_id = "api_id";
-    private String command = "command";
-    private Button mBtnProbeListButton, mBtnSwitchOn, mBtnSwitchOff, mBtnEasyConfigV2, mBtnEasyConfigV1;
-    private EditText mEtWifiSSIDEditText, mEtWifiPasswordEditText;
-    private String CODE = "code";
-    private String MSG = "msg";
     private Context context = MainActivity.this;
+
+    // Probe List
+    private Button mBtnProbeListButton;
     private String selectDeviceMac;
     private DeviceInfo selectedDevice;
     private ArrayList<DeviceInfo> deviceArrayList;
+
+    // EasyConfig
+    private Button mBtnEasyConfigV2, mBtnEasyConfigV1;
+    private EditText mEtWifiSSIDEditText, mEtWifiPasswordEditText;
+
+    // SP2 Control
+    private Button mBtnSwitchOn, mBtnSwitchOff;
+
     // RM2 Control
     private Button mBtnRM2Study, mBtnRM2Code, mBtnRM2Send;
     private TextView mTvRM2CodeResult;
@@ -43,13 +44,13 @@ public class MainActivity extends Activity {
     private TextView mTvRM1CodeResult;
     private String mRM1SendData;
     private int mCurrentRM1Password;
+
     // A1 Control
     private Button mBtnA1Control;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mBlNetwork = BLNetwork.getInstanceBLNetwork(MainActivity.this);
 
         initUI();
         initListeners();
@@ -109,7 +110,6 @@ public class MainActivity extends Activity {
         mBtnSwitchOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 Log.e("SP2Off_Mac", selectDeviceMac);
                 SP2Off(selectDeviceMac);
             }
@@ -235,8 +235,11 @@ public class MainActivity extends Activity {
         String[] deviceNamesAndMac = new String[deviceArrayList.size()];
         for (int i = 0; i < deviceArrayList.size(); i++) {
             DeviceInfo device = deviceArrayList.get(i);
-            deviceNamesAndMac[i] = device.getName() + "\n:" + device.getMac();
-            Log.d(this.getClass().getSimpleName(), device.toString());
+
+            String displayString = device.getName() + "\nType: " + device.getType() + "\nMAC: " + device.getMac() + "\nPassword:" + device.getPassword() + "\nKey: " + device.getKey();
+            if (device.getSubdevice() > 0)
+                displayString += "Sub-devices: " + device.getSubdevice();
+            deviceNamesAndMac[i] = displayString;
         }
         new AlertDialog.Builder(context)
                 .setSingleChoiceItems(deviceNamesAndMac, 0, null)
@@ -316,12 +319,10 @@ public class MainActivity extends Activity {
     }
 
     public void easyConfig(String ssid, String password, boolean isVersion2) {
-        JsonObject out = BroadlinkAPI.getInstance().easyConfig(ssid, password, isVersion2);
-        int code = out.get(CODE).getAsInt();
-        String msg = out.get(MSG).getAsString();
+        boolean success = BroadlinkAPI.getInstance().easyConfig(ssid, password, isVersion2);
 
         //Success
-        if (0 == code) {
+        if (success) {
             runOnUiThread(new Runnable() {
 
                 @Override

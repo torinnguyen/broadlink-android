@@ -26,6 +26,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/title_easy_config" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_warn_wifi_ssid_password" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/tv_warn_probe_to_find_device" />
 
             <Button
@@ -33,6 +43,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_probe_list" />
+
+            <EditText
+                android:id="@+id/et_wifi_ssid"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/et_wifi_password"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="passsword" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/btn_smartConfig_v2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_EasyConfig_v2" />
+
+                <Button
+                    android:id="@+id/btn_smartConfig_v1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_EasyConfig_v1" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_sp2_control" />
 
             <Button
                 android:id="@+id/btn_switch_on"
@@ -114,39 +158,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/a1_control" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tv_warn_wifi_ssid_password" />
-
-            <EditText
-                android:id="@+id/et_wifi_ssid"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/et_wifi_password"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="passsword" />
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <Button
-                    android:id="@+id/btn_smartConfig_v2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/btn_EasyConfig_v2" />
-
-                <Button
-                    android:id="@+id/btn_smartConfig_v1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/btn_EasyConfig_v1" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

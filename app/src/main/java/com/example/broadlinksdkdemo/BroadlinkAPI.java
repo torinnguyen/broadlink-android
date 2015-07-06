@@ -104,12 +104,15 @@ public class BroadlinkAPI {
     }
 
     //Magic config
-    public JsonObject easyConfig(String ssid, String password, boolean isVersion2) {
+    public boolean easyConfig(String ssid, String password, boolean isVersion2) {
         JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_EASY_CONFIG_ID, BroadlinkConstants.CMD_EASY_CONFIG);
         initJsonObjectParams.addProperty("ssid", ssid);
         initJsonObjectParams.addProperty("password", password);
         initJsonObjectParams.addProperty("broadlinkv2", isVersion2 ? 1 : 0);
-        return broadlinkExecuteCommand(initJsonObjectParams);
+
+        JsonObject out = broadlinkExecuteCommand(initJsonObjectParams);
+        int code = out.get(BroadlinkConstants.CODE).getAsInt();
+        return code == 0;
     }
 
     //Retrieve a list of devices within same WiFi
@@ -165,7 +168,7 @@ public class BroadlinkAPI {
         return code == 0;
     }
 
-    //????
+    //Enable study mode on RM1
     public boolean RM1Study(String mac) {
         JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_RM1_STUDY_ID, BroadlinkConstants.CMD_RM1_STUDY);
         initJsonObjectParams.addProperty("mac", mac);
@@ -186,7 +189,7 @@ public class BroadlinkAPI {
         return code == 0;
     }
 
-    //Study a code from RM1
+    //Retrieve the studied code from RM1
     public String RM1Code(String mac) {
         JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_RM1_CODE_ID, BroadlinkConstants.CMD_RM1_CODE);
         initJsonObjectParams.addProperty("mac", mac);
@@ -212,7 +215,7 @@ public class BroadlinkAPI {
         return code == 0;
     }
 
-    //????
+    //Enable study mode on RM2
     public boolean RM2Study(String mac) {
         JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_RM2_STUDY_ID, BroadlinkConstants.CMD_RM2_STUDY);
         initJsonObjectParams.addProperty("mac", mac);
@@ -222,7 +225,7 @@ public class BroadlinkAPI {
         return code == 0;
     }
 
-    //Study a code from RM2
+    //Retrieve the studied code from RM2
     public String RM2Code(String mac) {
         JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_RM2_CODE_ID, BroadlinkConstants.CMD_RM2_CODE);
         initJsonObjectParams.addProperty("mac", mac);
