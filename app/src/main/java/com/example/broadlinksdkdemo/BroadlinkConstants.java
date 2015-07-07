@@ -67,4 +67,44 @@ public class BroadlinkConstants {
     public static final int CMD_RM2_CODE_ID = 133;
     public static final int CMD_RM2_SEND_ID = 134;
     public static final int CMD_EASY_CONFIG_ID = 10000;
+
+    //Broadlink error codes
+    public static String getErrorMessage(int code) {
+        if (code == -1)
+            return "设备所在网络已改变或网络密码已经修改";
+        if (code == -2)
+            return "设备已在其他地方登录,如需继续控制,请重新登录(针对rm1/sp1)";
+        if (code == -3)
+            return "设备不在线";
+        if (code == -4)
+            return "不支持的操作";
+        if (code == -5)
+            return "空间满";
+        if (code == -6)
+            return "数据结构异常";
+        if (code == -7)
+            return "设备已经复位,需进入局域网重新认证。(针对sp1/rm1以外的设备)";
+        if (code == -100)
+            return "超时";
+        if (code == -101)
+            return "网络线程找不到该设备";
+        if (code == -102)
+            return "内存不足";
+        if (code == -103)
+            return "设备未初始化";
+        if (code == -104)
+            return "网络线程已暂停";
+        if (code == -105)
+            return "返回消息类型错误";
+        if (code == -106)
+            return "操作过于频繁";
+        if (code == -107)
+            return "服务器已拒绝该license操作,请联系客服处理";
+        if (code == -108)
+            return "设备不在局域网中";
+        if (code == -10000)
+            return "未知错误";
+
+        return "Unknown error code: " + code;
+    }
 }
