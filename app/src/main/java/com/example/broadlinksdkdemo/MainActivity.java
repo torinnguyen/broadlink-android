@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
     private Button mBtnSwitchOn, mBtnSwitchOff;
 
     // RM2 Control
-    private Button mBtnRM2Study, mBtnRM2Code, mBtnRM2Send;
+    private Button mBtnRM2Refresh, mBtnRM2Study, mBtnRM2Code, mBtnRM2Send;
     private TextView mTvRM2CodeResult;
     private String mRM2SendData;
 
@@ -78,6 +78,7 @@ public class MainActivity extends Activity {
         mBtnEasyConfigV2 = (Button) findViewById(R.id.btn_smartConfig_v2);
         mBtnEasyConfigV1 = (Button) findViewById(R.id.btn_smartConfig_v1);
 
+        mBtnRM2Refresh = (Button) findViewById(R.id.btn_rm2_refresh);
         mBtnRM2Study = (Button) findViewById(R.id.btn_rm2_study);
         mBtnRM2Code = (Button) findViewById(R.id.btn_rm2_code);
         mBtnRM2Send = (Button) findViewById(R.id.btn_rm2_send);
@@ -147,6 +148,12 @@ public class MainActivity extends Activity {
             }
         });
 
+        mBtnRM2Refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                RM2Refresh(selectDeviceMac);
+            }
+        });
         mBtnRM2Study.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -258,6 +265,15 @@ public class MainActivity extends Activity {
 
     public void SP2Off(String mac) {
         boolean success = BroadlinkAPI.getInstance().SP2Off(mac);
+    }
+
+    private void RM2Refresh(String mac) {
+        float temperature = BroadlinkAPI.getInstance().RM2Refresh(mac);
+        if (temperature == -1) {
+            Toast.makeText(context, R.string.toast_rm2_refresh_fail, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Toast.makeText(context, "RM2 Temperature: " + temperature + "℃", Toast.LENGTH_SHORT).show();
     }
 
     private void RM2Study(String mac) {

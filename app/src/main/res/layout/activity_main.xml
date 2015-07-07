@@ -96,6 +96,12 @@
                 android:text="@string/title_rm2_control" />
 
             <Button
+                android:id="@+id/btn_rm2_refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rm2_refresh" />
+
+            <Button
                 android:id="@+id/btn_rm2_study"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
