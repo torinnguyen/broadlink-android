@@ -274,23 +274,24 @@ public class BroadlinkAPI {
     /**
      * Enable study mode on RM1
      */
-    public boolean RM1Study(String mac) {
+    public boolean RM1StudyMode(String mac) {
         JsonObject out = broadlinkExecuteCommand(BroadlinkConstants.CMD_RM1_STUDY_ID, BroadlinkConstants.CMD_RM1_STUDY, mac);
         int code = out.get(BroadlinkConstants.CODE).getAsInt();
         return code == 0;
     }
 
     /**
-     * Authenticate a RM1 device?
+     * Authenticate a RM1 device & retrieve current temperature
      */
-    public boolean RM1Auth(String mac, int password) {
+    public float RM1Auth(String mac, int password) {
         JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_RM1_AUTH_ID, BroadlinkConstants.CMD_RM1_AUTH);
         initJsonObjectParams.addProperty("mac", mac);
         initJsonObjectParams.addProperty("password", password);
-
         JsonObject out = broadlinkExecuteCommand(initJsonObjectParams);
         int code = out.get(BroadlinkConstants.CODE).getAsInt();
-        return code == 0;
+        if (code != 0)
+            return BroadlinkConstants.INVALID_TEMPERATURE;
+        return out.get(BroadlinkConstants.TEMPERATURE).getAsFloat();
     }
 
     /**
@@ -327,14 +328,14 @@ public class BroadlinkAPI {
         JsonObject out = broadlinkExecuteCommand(BroadlinkConstants.CMD_RM2_REFRESH_ID, BroadlinkConstants.CMD_RM2_REFRESH, mac);
         int code = out.get(BroadlinkConstants.CODE).getAsInt();
         if (code != 0)
-            return -1;
+            return BroadlinkConstants.INVALID_TEMPERATURE;
         return out.get(BroadlinkConstants.TEMPERATURE).getAsFloat();
     }
 
     /**
      * Enable study mode on RM2
      */
-    public boolean RM2Study(String mac) {
+    public boolean RM2StudyMode(String mac) {
         JsonObject out = broadlinkExecuteCommand(BroadlinkConstants.CMD_RM2_STUDY_ID, BroadlinkConstants.CMD_RM2_STUDY, mac);
         int code = out.get(BroadlinkConstants.CODE).getAsInt();
         return code == 0;

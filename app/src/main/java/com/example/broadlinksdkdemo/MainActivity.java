@@ -157,7 +157,7 @@ public class MainActivity extends Activity {
         mBtnRM2Study.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                RM2Study(selectDeviceMac);
+                RM2StudyMode(selectDeviceMac);
             }
         });
         mBtnRM2Code.setOnClickListener(new View.OnClickListener() {
@@ -184,7 +184,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-                RM1Study(selectDeviceMac);
+                RM1StudyMode(selectDeviceMac);
             }
         });
         mBtnRM1Code.setOnClickListener(new View.OnClickListener() {
@@ -269,15 +269,15 @@ public class MainActivity extends Activity {
 
     private void RM2Refresh(String mac) {
         float temperature = BroadlinkAPI.getInstance().RM2Refresh(mac);
-        if (temperature == -1) {
+        if (temperature == BroadlinkConstants.INVALID_TEMPERATURE) {
             Toast.makeText(context, R.string.toast_rm2_refresh_fail, Toast.LENGTH_SHORT).show();
             return;
         }
         Toast.makeText(context, "RM2 Temperature: " + temperature + "℃", Toast.LENGTH_SHORT).show();
     }
 
-    private void RM2Study(String mac) {
-        boolean success = BroadlinkAPI.getInstance().RM2Study(mac);
+    private void RM2StudyMode(String mac) {
+        boolean success = BroadlinkAPI.getInstance().RM2StudyMode(mac);
         if (success)
             Toast.makeText(context, R.string.toast_rm2_study_success, Toast.LENGTH_SHORT).show();
         else
@@ -302,15 +302,16 @@ public class MainActivity extends Activity {
     }
 
     private void RM1Auth(String mac) {
-        boolean success = BroadlinkAPI.getInstance().RM1Auth(mac, mCurrentRM1Password);
-        if (success)
-            Toast.makeText(context, R.string.toast_rm1_auth_success, Toast.LENGTH_SHORT).show();
-        else
+        float temperature = BroadlinkAPI.getInstance().RM1Auth(mac, mCurrentRM1Password);
+        if (temperature == BroadlinkConstants.INVALID_TEMPERATURE) {
             Toast.makeText(context, R.string.toast_rm1_auth_fail, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Toast.makeText(context, "RM1 Auth Temperature: " + temperature + "℃", Toast.LENGTH_SHORT).show();
     }
 
-    private void RM1Study(String mac) {
-        boolean success = BroadlinkAPI.getInstance().RM1Study(mac);
+    private void RM1StudyMode(String mac) {
+        boolean success = BroadlinkAPI.getInstance().RM1StudyMode(mac);
         if (success)
             Toast.makeText(context, R.string.toast_rm1_study_success, Toast.LENGTH_SHORT).show();
         else

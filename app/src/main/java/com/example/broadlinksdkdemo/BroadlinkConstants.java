@@ -15,6 +15,7 @@ public class BroadlinkConstants {
     public static final String MSG = "msg";
     public static final String STATUS = "status";
     public static final String TEMPERATURE = "temperature";
+    public static final float INVALID_TEMPERATURE = -999;
 
     //Broadlink devices
     public static final String A1 = "A1";
