@@ -225,8 +225,8 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 int selectedPosition = ((AlertDialog) arg0).getListView().getCheckedItemPosition();
-                selectDeviceMac = deviceArrayList.get(selectedPosition).getMac();
                 selectedDevice = deviceArrayList.get(selectedPosition);
+                selectDeviceMac = selectedDevice.getMac();
                 addDevice();
                 Log.e("selectDeviceMac", selectDeviceMac);
                 deviceArrayList.clear();
@@ -257,6 +257,9 @@ public class MainActivity extends Activity {
     public void addDevice() {
         JsonObject out = BroadlinkAPI.getInstance().addDevice(selectedDevice);
         mCurrentRM1Password = selectedDevice.getPassword();
+
+        if (selectedDevice.type.equalsIgnoreCase(BroadlinkConstants.RM2))
+            BroadlinkAPI.getInstance().RM2Refresh(selectedDevice.mac);
     }
 
     public void SP2On(String mac) {

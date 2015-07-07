@@ -44,6 +44,7 @@ public class BroadlinkAPI {
             mBlNetwork = BLNetwork.getInstanceBLNetwork(context);
             blCloudAC = BLCloudAC.getInstance();
         } catch (Exception e) {
+            Log.e(this.getClass().getSimpleName(), "Check app permissions");
             Log.e(this.getClass().getSimpleName(), "" + e);
         }
     }
@@ -91,6 +92,10 @@ public class BroadlinkAPI {
      * Execute a Broadlink API with the given parameters
      */
     private JsonObject broadlinkExecuteCommand(JsonObject params) {
+        if (mBlNetwork == null) {
+            Log.e(this.getClass().getSimpleName(), "mBlNetwork is uninitialized, check app permissions");
+            return null;
+        }
         String responseString = mBlNetwork.requestDispatch(params.toString());
         JsonObject responseJsonObject = new JsonParser().parse(responseString).getAsJsonObject();
         Log.d(this.getClass().getSimpleName(), responseString);
@@ -135,10 +140,6 @@ public class BroadlinkAPI {
 
     /**
      * Magic config
-     * @param ssid
-     * @param password
-     * @param isVersion2
-     * @return
      */
     public boolean easyConfig(String ssid, String password, boolean isVersion2) {
         JsonObject initJsonObjectParams = broadlinkStandardParams(BroadlinkConstants.CMD_EASY_CONFIG_ID, BroadlinkConstants.CMD_EASY_CONFIG);

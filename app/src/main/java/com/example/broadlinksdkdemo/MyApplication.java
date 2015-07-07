@@ -29,9 +29,6 @@ public class MyApplication extends Application {
         if (deviceInfoArrayList.size() > 0) {
             DeviceInfo device = deviceInfoArrayList.get(0);
             BroadlinkAPI.getInstance().addDevice(device);
-
-            if (device.type.equalsIgnoreCase(BroadlinkConstants.RM2))
-                BroadlinkAPI.getInstance().RM2Refresh(device.mac);
         }
     }
 
