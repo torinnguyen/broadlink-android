@@ -26,7 +26,7 @@ public class MyApplication extends Application {
 
         //Extract list of device from Broadlink app
         ArrayList<DeviceInfo> deviceInfoArrayList = BroadlinkAPI.getInstance().getBroadlinkAppDeviceInfoArray();
-        if (deviceInfoArrayList.size() > 0) {
+        if (deviceInfoArrayList != null && deviceInfoArrayList.size() > 0) {
             DeviceInfo device = deviceInfoArrayList.get(0);
             BroadlinkAPI.getInstance().addDevice(device);
         }
